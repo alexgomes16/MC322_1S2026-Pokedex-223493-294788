@@ -1,0 +1,1 @@
+1|Charmander|0.6|8.5|MACHO|FOGO||30;30;30;30;30;30|NENHUMA|
