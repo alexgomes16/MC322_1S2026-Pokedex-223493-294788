@@ -5,7 +5,7 @@ package pokedex.enums;
  * em português. A ordem segue a tabela de vantagens/desvantagens do grupo.
  */
 public enum TipoPokemon {
-    ACO("Aço"),
+    ACO("Aco"),
     AGUA("Agua"),
     DRAGAO("Dragao"),
     ELETRICO("Eletrico"),

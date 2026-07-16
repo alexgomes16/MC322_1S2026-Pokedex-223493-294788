@@ -175,7 +175,7 @@ public class TelaCadastroPokemon {
             System.out.println("  1. Macho");
             System.out.println("  2. Femea");
             System.out.println("  3. Sem genero definido");
-            System.out.print("Escolha uma opção: ");
+            System.out.print("Escolha uma opcao: ");
             String entrada = scanner.nextLine().trim();
             if (entrada.equalsIgnoreCase(COMANDO_CORRIGIR)) {
                 return Passo.PESO;
@@ -191,7 +191,7 @@ public class TelaCadastroPokemon {
                     sexo = Sexo.SEM_GENERO;
                     return Passo.TIPO_PRINCIPAL;
                 default:
-                    System.out.println("Opção invalida. Escolha 1, 2 ou 3.\n");
+                    System.out.println("Opcao invalida. Escolha 1, 2 ou 3.\n");
             }
         }
     }
@@ -228,7 +228,7 @@ public class TelaCadastroPokemon {
             }
             TipoPokemon tipo = converterParaTipo(entrada);
             if (tipo == null) {
-                System.out.println("Opção invalida.\n");
+                System.out.println("Opcao invalida.\n");
                 continue;
             }
             if (tipo == tipoPrincipal) {
@@ -282,7 +282,7 @@ public class TelaCadastroPokemon {
                 return Passo.CONFIRMACAO;
             }
             if (!entrada.equals("1") && !entrada.equals("2")) {
-                System.out.println("Opção invalida. Escolha 1, 2 ou 3.\n");
+                System.out.println("Opcao invalida. Escolha 1, 2 ou 3.\n");
                 continue;
             }
             RelacaoEvolucao relacaoEscolhida = entrada.equals("1")
@@ -292,7 +292,7 @@ public class TelaCadastroPokemon {
             System.out.print("Nome do Pokemon ja cadastrado (ou \"corrigir\" para voltar): ");
             String nomeBusca = scanner.nextLine().trim();
             if (nomeBusca.equalsIgnoreCase(COMANDO_CORRIGIR)) {
-                continue; // volta a perguntar a relação (evolução/desevolução/nenhuma)
+                continue;
             }
             try {
                 pokemonRelacionado = buscarPokemonPorNome(nomeBusca);
