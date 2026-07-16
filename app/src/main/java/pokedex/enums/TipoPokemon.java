@@ -2,7 +2,7 @@ package pokedex.enums;
 
 /**
  * Os 18 tipos de Pokémon utilizados no projeto, com o nome de exibição
- * em português. A ordem segue a tabela de vantagens/desvantagens do grupo.
+ * A ordem segue a tabela de vantagens/desvantagens
  */
 public enum TipoPokemon {
     ACO("Aco"),

@@ -3,7 +3,6 @@ package pokedex.ui;
 import pokedex.enums.RelacaoEvolucao;
 import pokedex.enums.Sexo;
 import pokedex.enums.TipoPokemon;
-import pokedex.exceptions.PokemonDuplicadoException;
 import pokedex.exceptions.PokemonNaoEncontradoException;
 import pokedex.model.Estatisticas;
 import pokedex.model.Pokemon;
@@ -16,7 +15,7 @@ import java.util.Scanner;
 
 /**
  * Tela responsavel por editar as informacoes de um Pokemon ja cadastrado.
- * Se o usuario apenas pressionar ENTER em um campo, o valor atual e mantido.
+ * Se o usuario apenas pressionar ENTER em um campo, o valor atual e mantido
  */
 public class TelaEdicaoPokemon {
 
@@ -27,7 +26,6 @@ public class TelaEdicaoPokemon {
     private static final String RED = "\u001B[31m";
     private static final String GREEN = "\u001B[32m";
     private static final String YELLOW = "\u001B[33m";
-    private static final String BLUE = "\u001B[34m";
     private static final String CYAN = "\u001B[36m";
     private static final String BOLD = "\u001B[1m";
 
@@ -45,7 +43,6 @@ public class TelaEdicaoPokemon {
     private final PokemonService pokemonService;
     private Pokemon pokemonAlvo;
 
-    // Novos valores temporarios
     private String nome;
     private double altura;
     private double peso;
@@ -81,6 +78,7 @@ public class TelaEdicaoPokemon {
         System.out.print("\nDigite o nome ou numero (#) do Pokemon que deseja editar: ");
         String busca = scanner.nextLine().trim();
 
+        // PEga o Pokémon escolhido pelo usuário
         try {
             pokemonAlvo = identificarPokemon(busca);
             carregarDadosOriginais();
@@ -96,6 +94,9 @@ public class TelaEdicaoPokemon {
         }
     }
 
+    /**
+     * Carrega os dados originais do Pokémon escolhido, que vai ser editado
+     */
     private void carregarDadosOriginais() {
         this.nome = pokemonAlvo.getNome();
         this.altura = pokemonAlvo.getAltura();
@@ -115,12 +116,17 @@ public class TelaEdicaoPokemon {
         this.pokemonRelacionado = pokemonAlvo.getRelacionado();
     }
 
+    /**
+     * Vai buscar o Pokémon escolhido pelo usuário
+     */
     private Pokemon identificarPokemon(String busca) throws PokemonNaoEncontradoException {
         if (busca.startsWith("#")) {
             try {
                 int num = Integer.parseInt(busca.replace("#", "").trim());
                 Optional<Pokemon> p = pokemonService.getRepositorio().buscarPorNumero(num);
-                if (p.isPresent()) return p.get();
+                if (p.isPresent()) {
+                    return p.get();
+                }
             } catch (NumberFormatException ignored) {}
         }
 
@@ -132,7 +138,9 @@ public class TelaEdicaoPokemon {
         try {
             int num = Integer.parseInt(busca);
             Optional<Pokemon> p = pokemonService.getRepositorio().buscarPorNumero(num);
-            if (p.isPresent()) return p.get();
+            if (p.isPresent()) {
+                return p.get();
+            }
         } catch (NumberFormatException ignored) {}
 
         throw new PokemonNaoEncontradoException("Nenhum Pokemon encontrado com a busca: \"" + busca + "\".");
@@ -445,7 +453,7 @@ public class TelaEdicaoPokemon {
         }
 
         try {
-            // 1. Atualiza diretamente o objeto original que já está na lista da Pokédex
+            // Atualiza diretamente o objeto original que já está na lista da Pokédex
             pokemonAlvo.setNome(nome);
             pokemonAlvo.setAltura(altura);
             pokemonAlvo.setPeso(peso);
@@ -456,7 +464,7 @@ public class TelaEdicaoPokemon {
             pokemonAlvo.setRelacaoEvolucao(relacaoEvolucao);
             pokemonAlvo.setRelacionado(pokemonRelacionado);
 
-            // 2. Salva o estado atualizado do repositório de volta no arquivo de dados!
+            // Salva o estado atualizado do repositório de volta no arquivo de dados
             pokemonService.getRepositorio().salvarEmArquivo();
             
             System.out.println(GREEN + BOLD + "\n" + nome + " foi atualizado com sucesso na Pokedex! (#"

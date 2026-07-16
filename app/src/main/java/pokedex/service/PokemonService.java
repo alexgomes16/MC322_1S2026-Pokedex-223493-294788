@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Camada de serviço: orquestra as regras de negócio do cadastro de Pokémon,
  * como o cálculo automático de vantagens/desvantagens de tipo, a atribuição
- * do número de catalogação e a persistência em arquivo.
+ * do número de catalogação e a persistência em arquivo
  */
 public class PokemonService {
 
@@ -27,7 +27,7 @@ public class PokemonService {
 
     /**
      * Finaliza o cadastro de um Pokémon: calcula vantagens/desvantagens de
-     * tipo, atribui o número de catalogação e persiste em arquivo.
+     * tipo, atribui o número de catalogação e persiste em arquivo
      */
     public Pokemon cadastrarPokemon(Pokemon pokemon) throws PokemonDuplicadoException, IOException {
         pokemon.setVantagens(calculadoraTipo.calcularVantagens(pokemon.getTipoPrincipal(), pokemon.getTipoSecundario()));

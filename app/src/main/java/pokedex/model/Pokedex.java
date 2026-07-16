@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Representa a Pokédex do treinador: a coleção de Pokémon já catalogados.
+ * Representa a Pokédex do treinador
  */
 public class Pokedex {
 

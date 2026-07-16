@@ -13,12 +13,12 @@ import java.util.List;
 
 /**
  * Base genérica para repositórios que persistem uma lista de objetos
- * {@link Persistivel} em um arquivo de texto, uma linha por objeto.
+ * {@link Persistivel} em um arquivo de texto, uma linha por objeto
  *
  * Cada subclasse concreta (ex: PokemonRepositorioArquivo) só precisa
- * saber como reconstruir seu tipo específico a partir de uma linha.
+ * saber como reconstruir seu tipo específico a partir de uma linha
  *
- * @param <T> tipo do objeto persistido, que deve saber se serializar.
+ * @param <T> tipo do objeto persistido, que deve saber se serializar
  */
 public abstract class RepositorioArquivoBase<T extends Persistivel> {
 
@@ -59,6 +59,8 @@ public abstract class RepositorioArquivoBase<T extends Persistivel> {
         return itens;
     }
 
-    /** Cada subclasse sabe como reconstruir seu objeto a partir de uma linha do arquivo. */
+    /** 
+     * Cada subclasse sabe como reconstruir seu objeto a partir de uma linha do arquivo
+     */
     protected abstract T deserializar(String linha);
 }

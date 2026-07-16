@@ -1,10 +1,10 @@
-# 🔴 Pokédex - MC322 (Projeto Final)
+# 🔴 Pokédex - MC322
 
-> Um sistema robusto de gerenciamento, catalogação e análise de Pokémon desenvolvido em Java para a disciplina **MC322 (Programação Orientada a Objetos)** da UNICAMP. O projeto une conceitos avançados de POO, persistência segura em arquivos, regras de negócio dinâmicas para vantagens/desvantagens de tipos e uma suíte completa de testes unitários automatizados.
+> Um sistema robusto de gerenciamento, catalogação e análise de Pokémon desenvolvido em Java para a disciplina **MC322 (Programação Orientada a Objetos)** da UNICAMP. O projeto une conceitos avançados de POO, persistência segura em arquivos, regras de negócio dinâmicas para vantagens/desvantagens de tipos e uma suíte completa de testes unitários automatizados. Assim o treinador Pokémon poderá cadastrar cada um de seus Pokémon capturados, colocando todas as informações da criatura, e então pode visualisar todos os seus Pokémon capturados e cadastrados, e editar as informações de cada um.
 
 ---
 
-## 🛠️ Arquitetura do Sistema e Design Patterns
+## 🛠️ Arquitetura do Sistema 
 
 O projeto foi estruturado seguindo rigorosamente a separação de responsabilidades (camadas), o que garante alta coesão e baixo acoplamento:
 
@@ -22,15 +22,15 @@ pokedex
 
 ## 🚀 Principais Funcionalidades
 
-* **Cadastro Inteligente de Pokémon**: Registro completo contendo nome, peso, altura, gênero, tipagem primária/secundária e estatísticas base de combate (HP, Attack, Defense, Sp. Atk, Sp. Def, Speed).
-* **Edição de Dados em Tempo Real**: Tela interativa que permite modificar qualquer atributo do Pokémon cadastrado, apresentando uma tela de revisão antes de persistir as mudanças no banco de dados flat-file.
-* **Cálculo Automático de Batalha (Matchup)**: Geração automatizada das fraquezas e resistências elementais do Pokémon ao cadastrá-lo, utilizando um algoritmo de matriz de eficiência de tipos integrado no `CalculadoraTipo`.
+* **Cadastro de Pokémon**: Registro completo contendo nome, peso, altura, gênero, tipagem primária/secundária e estatísticas base de combate (HP, Attack, Defense, Sp. Atk, Sp. Def, Speed).
+* **Edição de Dados**: Tela interativa que permite modificar qualquer atributo do Pokémon cadastrado, apresentando uma tela de revisão antes de persistir as mudanças no banco de dados flat-file.
+* **Cálculo Automático de Batalha**: Geração automatizada das fraquezas e resistências elementais do Pokémon ao cadastrá-lo, utilizando um algoritmo de matriz de eficiência de tipos integrado no `CalculadoraTipo`.
 * **Consulta e Busca Avançada**: Pesquisas instantâneas por ID (Número de catalogação) ou nome, exibindo árvores evolutivas e relações de parentesco entre espécies.
 * **Mecanismo de Persistência Flat-File**: Criação de um banco de dados em arquivo de texto plano customizado com controle de concorrência e geração automática de IDs incrementais (`proximoNumero`).
 
 ---
 
-## 🧪 Qualidade de Software: Testes Unitários e Cobertura (83%)
+## 🧪 Testes Unitários e Cobertura (83%)
 
 Para atingir o padrão de excelência exigido na disciplina, desenvolvemos testes automatizados utilizando **JUnit 5** e medimos a eficiência de cobertura de ramificações de código através do **JaCoCo**. 
 
@@ -66,7 +66,8 @@ app/build/reports/jacoco/test/html/index.html
 ## 👥 Desenvolvedores (Grupo)
 
 * **Leonardo Batista da Silva RA 223493** - UNICAMP / MC322
-* **RA 294788** - UNICAMP / MC322
+* **Alex Gomes Pessoa RA 294788** - UNICAMP / MC322
 
 ---
-*Este projeto foi desenvolvido estritamente para fins pedagógicos e de avaliação na Universidade Estadual de Campinas (UNICAMP).*
+
+Aproveite a Pokédex treinador 

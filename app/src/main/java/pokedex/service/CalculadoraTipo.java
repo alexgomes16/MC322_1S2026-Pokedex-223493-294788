@@ -13,7 +13,7 @@ import static pokedex.enums.TipoPokemon.*;
 /**
  * Responsável por calcular automaticamente as vantagens e desvantagens
  * de um Pokémon com base no(s) seu(s) tipo(s), seguindo a tabela de
- * efetividade de tipos definida para o projeto.
+ * efetividade de tipos definida para o Pokémon
  */
 public class CalculadoraTipo {
 
@@ -76,12 +76,16 @@ public class CalculadoraTipo {
         DESVANTAGENS.put(VOADOR, List.of(ELETRICO, GELO, PEDRA));
     }
 
-    /** Vantagens combinadas do tipo principal (+ secundário, se houver), sem repetir tipos. */
+    /** 
+     * Vantagens combinadas do tipo principal (+ secundário, se houver), sem repetir tipos
+     */
     public List<TipoPokemon> calcularVantagens(TipoPokemon principal, TipoPokemon secundario) {
         return combinarSemDuplicar(principal, secundario, VANTAGENS);
     }
 
-    /** Desvantagens combinadas do tipo principal (+ secundário, se houver), sem repetir tipos. */
+    /** 
+     * Desvantagens combinadas do tipo principal (+ secundário, se houver), sem repetir tipos
+     */
     public List<TipoPokemon> calcularDesvantagens(TipoPokemon principal, TipoPokemon secundario) {
         return combinarSemDuplicar(principal, secundario, DESVANTAGENS);
     }
