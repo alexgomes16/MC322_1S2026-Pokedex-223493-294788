@@ -16,7 +16,7 @@ import java.util.Scanner;
 /**
  * Tela responsavel por conduzir o cadastro de um novo Pokemon, campo a
  * campo. A qualquer momento o usuario pode digitar "corrigir" para voltar
- * ao campo anterior e preenche-lo novamente.
+ * ao campo anterior e preenche-lo novamente
  */
 public class TelaCadastroPokemon {
 
@@ -27,18 +27,21 @@ public class TelaCadastroPokemon {
     private static final String RED = "\u001B[31m";
     private static final String GREEN = "\u001B[32m";
     private static final String YELLOW = "\u001B[33m";
-    private static final String BLUE = "\u001B[34m";
     private static final String CYAN = "\u001B[36m";
     private static final String BOLD = "\u001B[1m";
 
-    /** Ordem dos passos do formulario de cadastro. */
+    /** 
+     * Ordem dos passos do formulario de cadastro
+     */
     private enum Passo {
         NOME, ALTURA, PESO, SEXO, TIPO_PRINCIPAL, TIPO_SECUNDARIO,
         VIDA, ATAQUE, DEFESA, ATAQUE_ESPECIAL, DEFESA_ESPECIAL, VELOCIDADE,
         RELACAO_EVOLUCAO, CONFIRMACAO
     }
 
-    /** Pequena interface funcional usada para atribuir o valor lido ao campo correspondente. */
+    /** 
+     * Pequena interface funcional usada para atribuir o valor lido ao campo correspondente
+     */
     private interface Atribuidor<T> {
         void atribuir(T valor);
     }
@@ -82,7 +85,9 @@ public class TelaCadastroPokemon {
         }
     }
 
-    /** Executa um passo do formulario e devolve o proximo passo a ser executado (ou null para encerrar). */
+    /** 
+     * Executa um passo do formulario e devolve o proximo passo a ser executado (ou null para encerrar) 
+     */
     private Passo executarPasso(Passo passo) {
         exibirCabecalho();
         switch (passo) {
@@ -131,15 +136,29 @@ public class TelaCadastroPokemon {
         }
     }
 
-    /** Mostra de forma organizada o que o usuario ja preencheu ate o momento */
+    /** 
+     * Mostra de forma organizada o que o usuario ja preencheu ate o momento 
+     */
     private void exibirDadosAtuais() {
         System.out.println(CYAN + "Progresso atual:" + RESET);
-        if (nome != null) System.out.println("  -> Nome: " + GREEN + nome + RESET);
-        if (altura > 0) System.out.println("  -> Altura: " + GREEN + altura + "m" + RESET);
-        if (peso > 0) System.out.println("  -> Peso: " + GREEN + peso + "kg" + RESET);
-        if (sexo != null) System.out.println("  -> Sexo: " + GREEN + sexo + RESET);
-        if (tipoPrincipal != null) System.out.println("  -> Tipo Principal: " + GREEN + tipoPrincipal.getNomeExibicao() + RESET);
-        if (tipoSecundario != null) System.out.println("  -> Tipo Secundario: " + GREEN + tipoSecundario.getNomeExibicao() + RESET);
+        if (nome != null) {
+            System.out.println("  -> Nome: " + GREEN + nome + RESET);
+        }
+        if (altura > 0) {
+            System.out.println("  -> Altura: " + GREEN + altura + "m" + RESET);
+        }
+        if (peso > 0) {
+            System.out.println("  -> Peso: " + GREEN + peso + "kg" + RESET);
+        }
+        if (sexo != null) {
+            System.out.println("  -> Sexo: " + GREEN + sexo + RESET);
+        }
+        if (tipoPrincipal != null) {
+            System.out.println("  -> Tipo Principal: " + GREEN + tipoPrincipal.getNomeExibicao() + RESET);
+        }
+        if (tipoSecundario != null) {
+            System.out.println("  -> Tipo Secundario: " + GREEN + tipoSecundario.getNomeExibicao() + RESET);
+        }
         System.out.println(CYAN + "-----------------------------------------------------" + RESET);
     }
 
@@ -153,7 +172,7 @@ public class TelaCadastroPokemon {
             if (entrada.isEmpty()) {
                 System.out.println(RED + "\nEste campo e obrigatorio e nao pode ficar em branco.\n" + RESET);
                 pausarInformativo();
-                return passoAnterior; // Retorna com segurança para o passo atual
+                return passoAnterior;
             }
             atribuidor.atribuir(entrada);
             return proximoPasso;
@@ -170,7 +189,7 @@ public class TelaCadastroPokemon {
             if (entrada.isEmpty()) {
                 System.out.println(RED + "\nEste campo e obrigatorio e nao pode ficar em branco.\n" + RESET);
                 pausarInformativo();
-                return passoAnterior; // Retorna com segurança para o passo atual
+                return passoAnterior;
             }
             try {
                 double valor = Double.parseDouble(entrada.replace(",", "."));
@@ -199,7 +218,7 @@ public class TelaCadastroPokemon {
             if (entrada.isEmpty()) {
                 System.out.println(RED + "\nEste campo e obrigatorio e nao pode ficar em branco.\n" + RESET);
                 pausarInformativo();
-                return passoAnterior; // Retorna com segurança para o passo atual
+                return passoAnterior;
             }
             try {
                 int valor = Integer.parseInt(entrada);
@@ -293,6 +312,9 @@ public class TelaCadastroPokemon {
         }
     }
 
+    /**
+     * Exibe a lista dos tipos de Pokémon (Ex: fogo, água, etc)
+     */
     private void exibirListaDeTipos() {
         TipoPokemon[] tipos = TipoPokemon.values();
         System.out.println(CYAN + "\n+---------------------------------------------------+" + RESET);
@@ -318,6 +340,9 @@ public class TelaCadastroPokemon {
         return null;
     }
 
+    /**
+     * Le a relação do Pokémon (se é evolução, desevolução ou nada)
+     */
     private Passo lerRelacaoEvolucao() {
         while (true) {
             System.out.println(BOLD + "Este Pokemon e evolucao ou desevolucao de outro ja cadastrado?" + RESET);
@@ -370,6 +395,9 @@ public class TelaCadastroPokemon {
         return encontrados.get(0);
     }
 
+    /**
+     * Confirma e salva o Pokémon, cadastrando e salvando as informações
+     */
     private Passo confirmarECadastrar() {
         limparConsole();
         Estatisticas estatisticas = new Estatisticas(vida, ataque, defesa, ataqueEspecial, defesaEspecial, velocidade);

@@ -13,7 +13,7 @@ import java.util.Scanner;
  * Tela responsavel por consultar os Pokemon ja cadastrados: pesquisar por
  * nome ou visualizar a lista completa (em ordem de cadastramento), podendo
  * abrir os detalhes de qualquer um deles a partir do numero exibido na
- * lista, e voltar tanto para a lista quanto direto para o menu principal.
+ * lista, e voltar tanto para a lista quanto direto para o menu principal
  */
 public class TelaConsultaPokemon extends MenuBase {
 
@@ -44,7 +44,7 @@ public class TelaConsultaPokemon extends MenuBase {
     @Override
     protected void exibirOpcoes() {
         limparConsole();
-        // Caixa de menu perfeitamente alinhada com 51 caracteres
+        // Caixa de menu
         System.out.println(CYAN + "+-------------------------------------------------+" + RESET);
         System.out.println(CYAN + "| " + RESET + BOLD + "               VISUALIZAR POKEMON               " + RESET + CYAN + " |" + RESET);
         System.out.println(CYAN + "+-------------------------------------------------+" + RESET);
@@ -71,7 +71,9 @@ public class TelaConsultaPokemon extends MenuBase {
         }
     }
 
-    /** @return true se o usuario optou por ir direto ao menu principal a partir da consulta. */
+    /** 
+     * @return true se o usuario optou por ir direto ao menu principal a partir da consulta
+     */
     private boolean pesquisarPorNome() {
         if (pokemonService.getRepositorio().listarTodos().isEmpty()) {
             System.out.println(RED + "\nSua Pokedex ainda nao tem nenhum Pokemon cadastrado." + RESET);
@@ -94,7 +96,9 @@ public class TelaConsultaPokemon extends MenuBase {
         return exibirListaEAbrirDetalhes(encontrados, "Resultado da pesquisa por \"" + nome + "\"");
     }
 
-    /** @return true se o usuario optou por ir direto ao menu principal a partir da consulta. */
+    /** 
+     * @return true se o usuario optou por ir direto ao menu principal a partir da consulta
+     */
     private boolean exibirListaCompleta() {
         List<Pokemon> todos = pokemonService.getRepositorio().listarTodos();
         if (todos.isEmpty()) {
@@ -108,7 +112,7 @@ public class TelaConsultaPokemon extends MenuBase {
     /**
      * Mostra uma lista de Pokemon (numero + nome)
      * e permite abrir os detalhes de qualquer um deles digitando o numero
-     * correspondente.
+     * correspondente
      */
     private boolean exibirListaEAbrirDetalhes(List<Pokemon> lista, String titulo) {
         while (true) {
@@ -162,7 +166,7 @@ public class TelaConsultaPokemon extends MenuBase {
 
     /**
      * Mostra os detalhes completos de um Pokemon e pergunta para onde o
-     * usuario deseja ir em seguida.
+     * usuario deseja ir em seguida
      */
     private boolean mostrarDetalhes(Pokemon pokemon) {
         limparConsole();

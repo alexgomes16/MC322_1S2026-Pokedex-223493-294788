@@ -11,8 +11,8 @@ import java.util.Optional;
 
 /**
  * Camada de acesso a dados do Pokémon. Mantém a {@link Pokedex} em memória
- * (composição) e delega a leitura/gravação em arquivo para o
- * {@link PokemonRepositorioArquivo} (também composição).
+ * e delega a leitura/gravação em arquivo para o
+ * {@link PokemonRepositorioArquivo}
  */
 public class PokemonRepositorio {
 
@@ -35,7 +35,7 @@ public class PokemonRepositorio {
         try {
             List<Pokemon> carregados = repositorioArquivo.carregarTodos();
             for (Pokemon p : carregados) {
-                // Recalcula vantagens/desvantagens (não são persistidas, são derivadas do tipo)
+                // Recalcula vantagens/desvantagens
                 p.setVantagens(calculadoraTipo.calcularVantagens(p.getTipoPrincipal(), p.getTipoSecundario()));
                 p.setDesvantagens(calculadoraTipo.calcularDesvantagens(p.getTipoPrincipal(), p.getTipoSecundario()));
                 pokedex.adicionar(p);

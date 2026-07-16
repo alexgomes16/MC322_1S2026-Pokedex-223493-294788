@@ -9,8 +9,7 @@ import pokedex.model.Pokemon;
 
 /**
  * Implementação concreta de {@link RepositorioArquivoBase} responsável por
- * ler e gravar Pokémon em um arquivo de texto (uma linha por Pokémon,
- * campos separados por "|").
+ * ler e gravar Pokémon em um arquivo de texto
  */
 public class PokemonRepositorioArquivo extends RepositorioArquivoBase<Pokemon> {
 
@@ -38,7 +37,7 @@ public class PokemonRepositorioArquivo extends RepositorioArquivoBase<Pokemon> {
 
         if (partes.length > 9 && !partes[9].isEmpty()) {
             // A referência real ao objeto Pokemon relacionado é resolvida depois,
-            // pelo PokemonRepositorio, quando todos já estiverem carregados.
+            // pelo PokemonRepositorio, quando todos já estiverem carregados
             pokemon.setNumeroRelacionado(Integer.parseInt(partes[9]));
         }
 

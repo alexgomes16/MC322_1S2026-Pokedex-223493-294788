@@ -18,8 +18,8 @@ import java.util.List;
  *  - Buscavel: sabe dizer se corresponde a um termo de pesquisa;
  *  - Persistivel: sabe se converter em uma linha de arquivo.
  *
- * Também mantém uma associação (relacionado) com outro Pokémon já
- * cadastrado, representando uma relação de evolução/desevolução.
+ * Também mantém uma associação com outro Pokémon já
+ * cadastrado, representando uma relação de evolução/desevolução
  */
 public class Pokemon implements Exibivel, Buscavel, Persistivel {
 
@@ -38,10 +38,10 @@ public class Pokemon implements Exibivel, Buscavel, Persistivel {
     private RelacaoEvolucao relacaoEvolucao = RelacaoEvolucao.NENHUMA;
 
     // Usado apenas durante a leitura do arquivo, para religar a associação
-    // acima depois que todos os Pokémon já tiverem sido carregados.
+    // acima depois que todos os Pokémon já tiverem sido carregados
     private int numeroRelacionado = -1;
 
-    // Calculados automaticamente pela CalculadoraTipo com base no(s) tipo(s)
+    // Calculados automaticamente pela CalculadoraTipo com base nos Tipos
     private List<TipoPokemon> vantagens = new ArrayList<>();
     private List<TipoPokemon> desvantagens = new ArrayList<>();
 
@@ -56,8 +56,6 @@ public class Pokemon implements Exibivel, Buscavel, Persistivel {
         this.tipoSecundario = tipoSecundario;
         this.estatisticas = estatisticas;
     }
-
-    //Implementação das interfaces
 
     @Override
     public boolean correspondeATermo(String termo) {

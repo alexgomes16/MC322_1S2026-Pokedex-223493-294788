@@ -2,7 +2,7 @@ package pokedex.model;
 
 /**
  * Estatísticas de combate de um Pokémon: Vida, Ataque, Defesa,
- * Ataque Especial, Defesa Especial e Velocidade.
+ * Ataque Especial, Defesa Especial e Velocidade
  */
 public class Estatisticas {
 
@@ -37,7 +37,9 @@ public class Estatisticas {
         );
     }
 
-    /** Serializa os campos separados por ";" (usado dentro do "campo" de estatísticas no arquivo). */
+    /** 
+     * Serializa os campos separados por ";" (usado dentro do "campo" de estatísticas no arquivo)
+     */
     public String serializar() {
         return vida + ";" + ataque + ";" + defesa + ";" + ataqueEspecial + ";" + defesaEspecial + ";" + velocidade;
     }

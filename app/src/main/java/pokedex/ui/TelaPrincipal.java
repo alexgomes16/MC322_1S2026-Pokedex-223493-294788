@@ -5,6 +5,10 @@ import pokedex.abstracts.MenuBase;
 import pokedex.repository.PokemonRepositorio;
 import pokedex.service.PokemonService;
 
+/**
+ * Tela inicial do jogo: mostra o letreiro "Pokédex" e o menu principal
+ * (Cadastrar / Visualizar / Editar)
+ */
 public class TelaPrincipal extends MenuBase {
    // Códigos de cores ANSI para destacar as informações
    private static final String RESET = "\u001B[0m";
@@ -15,7 +19,7 @@ public class TelaPrincipal extends MenuBase {
    private static final String BLUE = "\u001B[34m";
    private static final String BOLD = "\u001B[1m";
 
-   // LOGO TOTALMENTE CALIBRADO (Espaços e barras invertidas corrigidos para o X)
+   // Logo da Pokédex, estilizada
    private static final String LOGO = 
       "      ____   ____  _  __ ______ _____  ______  __  __\n" +
       "     |  _ \\ / __ \\| |/ /|  ____|  __ \\|  ____| \\ \\/ /\n" +
@@ -41,10 +45,10 @@ public class TelaPrincipal extends MenuBase {
    protected void exibirOpcoes() {
       limparConsole();
       
-      // Imprime o Logo perfeitamente em Vermelho Negrito
+      // Imprime o Logo 
       System.out.println(RED + BOLD + LOGO + RESET);
       
-      // Caixa do menu recalibrada caractere por caractere para ficar reta
+      // Caixa do menu da Pokédex
       System.out.println(CYAN + "+---------------------------------------------------+" + RESET);
       System.out.println(CYAN + "| " + RESET + BOLD + "            Bem-vindo(a) a sua Pokedex!          " + RESET + CYAN + " |" + RESET);
       System.out.println(CYAN + "+---------------------------------------------------+" + RESET);
@@ -56,6 +60,9 @@ public class TelaPrincipal extends MenuBase {
       System.out.print("\nDigite sua opcao: ");
    }
 
+   /**
+    * Processa a opção escolhida pelo usuario do menu
+    */
    @Override
    protected boolean processarOpcao(String opcao) {
       switch (opcao) {
