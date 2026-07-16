@@ -42,7 +42,7 @@ Ao ignorar a camada visual (`pokedex.ui`), que depende exclusivamente de inputs 
 | **`pokedex.repository`** | **82%** | 🟢 Excelente |
 | **`pokedex.model`** | **~80%** | 🟢 Excelente |
 | **`pokedex.exceptions`** | **100%** | 🟢 Excelente |
-| **COBERTURA TOTAL (Geral)** | **83%** | 🏆 **Nota Máxima** |
+| **COBERTURA TOTAL (Geral)** | **83%** | 🟢 Excelente |
 
 ---
 
