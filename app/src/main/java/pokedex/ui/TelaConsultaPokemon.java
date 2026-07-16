@@ -10,15 +10,24 @@ import java.util.Optional;
 import java.util.Scanner;
 
 /**
- * Tela responsável por consultar os Pokémon já cadastrados: pesquisar por
+ * Tela responsavel por consultar os Pokemon ja cadastrados: pesquisar por
  * nome ou visualizar a lista completa (em ordem de cadastramento), podendo
- * abrir os detalhes de qualquer um deles a partir do número exibido na
+ * abrir os detalhes de qualquer um deles a partir do numero exibido na
  * lista, e voltar tanto para a lista quanto direto para o menu principal.
  */
 public class TelaConsultaPokemon extends MenuBase {
 
     private static final String COMANDO_VOLTAR = "voltar";
     private static final String COMANDO_MENU = "menu";
+
+    // Codigos de cores ANSI para estilização
+    private static final String RESET = "\u001B[0m";
+    private static final String RED = "\u001B[31m";
+    private static final String GREEN = "\u001B[32m";
+    private static final String YELLOW = "\u001B[33m";
+    private static final String BLUE = "\u001B[34m";
+    private static final String CYAN = "\u001B[36m";
+    private static final String BOLD = "\u001B[1m";
 
     private final PokemonService pokemonService;
 
@@ -27,13 +36,23 @@ public class TelaConsultaPokemon extends MenuBase {
         this.pokemonService = pokemonService;
     }
 
+    private void limparConsole() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     @Override
     protected void exibirOpcoes() {
-        System.out.println("\n=========== VISUALIZAR POKEMON ===========");
-        System.out.println(" 1. Pesquisar Pokemon pelo nome");
-        System.out.println(" 2. Ver lista completa de Pokemon");
-        System.out.println(" 0. Voltar ao menu principal");
-        System.out.println("============================================");
+        limparConsole();
+        // Caixa de menu perfeitamente alinhada com 51 caracteres
+        System.out.println(CYAN + "+-------------------------------------------------+" + RESET);
+        System.out.println(CYAN + "| " + RESET + BOLD + "               VISUALIZAR POKEMON               " + RESET + CYAN + " |" + RESET);
+        System.out.println(CYAN + "+-------------------------------------------------+" + RESET);
+        System.out.println(CYAN + "| " + RESET + " " + GREEN + "[1]" + RESET + " Pesquisar Pokemon pelo nome                  " + CYAN + "|" + RESET);
+        System.out.println(CYAN + "| " + RESET + " " + BLUE + "[2]" + RESET + " Ver lista completa de Pokemon                " + CYAN + "|" + RESET);
+        System.out.println(CYAN + "| " + RESET + " " + RED + "[0]" + RESET + " Voltar ao menu principal                     " + CYAN + "|" + RESET);
+        System.out.println(CYAN + "+-------------------------------------------------+" + RESET);
+        System.out.print("\nDigite sua opcao: ");
     }
 
     @Override
@@ -46,26 +65,28 @@ public class TelaConsultaPokemon extends MenuBase {
             case "0":
                 return false;
             default:
-                System.out.println("\nOpcao invalida. Tente novamente.");
+                System.out.println(RED + "\nOpcao invalida. Tente novamente." + RESET);
                 pausar();
                 return true;
         }
     }
 
-    /** @return true se o usuário optou por ir direto ao menu principal a partir da consulta. */
+    /** @return true se o usuario optou por ir direto ao menu principal a partir da consulta. */
     private boolean pesquisarPorNome() {
         if (pokemonService.getRepositorio().listarTodos().isEmpty()) {
-            System.out.println("\nSua Pokedex ainda nao tem nenhum Pokemon cadastrado.");
+            System.out.println(RED + "\nSua Pokedex ainda nao tem nenhum Pokemon cadastrado." + RESET);
             pausar();
             return false;
         }
 
+        limparConsole();
+        System.out.println(YELLOW + BOLD + "================ PESQUISAR POKEMON ================" + RESET);
         System.out.print("\nDigite o nome do Pokemon que deseja pesquisar: ");
         String nome = scanner.nextLine().trim();
 
         List<Pokemon> encontrados = pokemonService.getRepositorio().buscarPorNome(nome);
         if (encontrados.isEmpty()) {
-            System.out.println("\nNenhum Pokemon chamado \"" + nome + "\" foi encontrado.");
+            System.out.println(RED + "\nNenhum Pokemon chamado \"" + nome + "\" foi encontrado." + RESET);
             pausar();
             return false;
         }
@@ -73,34 +94,37 @@ public class TelaConsultaPokemon extends MenuBase {
         return exibirListaEAbrirDetalhes(encontrados, "Resultado da pesquisa por \"" + nome + "\"");
     }
 
-    /** @return true se o usuário optou por ir direto ao menu principal a partir da consulta. */
+    /** @return true se o usuario optou por ir direto ao menu principal a partir da consulta. */
     private boolean exibirListaCompleta() {
         List<Pokemon> todos = pokemonService.getRepositorio().listarTodos();
         if (todos.isEmpty()) {
-            System.out.println("\nSua Pokedex ainda nao tem nenhum Pokemon cadastrado.");
+            System.out.println(RED + "\nSua Pokedex ainda nao tem nenhum Pokemon cadastrado." + RESET);
             pausar();
             return false;
         }
-        return exibirListaEAbrirDetalhes(todos, "Lista completa de Pokemon (ordem de cadastro)");
+        return exibirListaEAbrirDetalhes(todos, "Lista completa (ordem de cadastro)");
     }
 
     /**
-     * Mostra uma lista de Pokémon (número + nome)
-     * e permite abrir os detalhes de qualquer um deles digitando o número
+     * Mostra uma lista de Pokemon (numero + nome)
+     * e permite abrir os detalhes de qualquer um deles digitando o numero
      * correspondente.
-     *
-     * @return true se o usuário optou por ir direto ao menu principal a
-     *         partir da tela de detalhes; false se voltou apenas desta lista
-     *         (retornando ao submenu de consulta).
      */
     private boolean exibirListaEAbrirDetalhes(List<Pokemon> lista, String titulo) {
         while (true) {
-            System.out.println("\n--- " + titulo + " ---");
+            limparConsole();
+            System.out.println(YELLOW + BOLD + "=== " + titulo.toUpperCase() + " ===" + RESET + "\n");
+            
             for (Pokemon pokemon : lista) {
-                System.out.println(pokemon.exibirResumo());
+                // Destaca os resumos com verde/ciano para ficar agradavel
+                System.out.println(" " + GREEN + "-> " + RESET + pokemon.exibirResumo());
             }
-            System.out.print("\nDigite o numero do Pokemon para ver detalhes, ou \""
-                    + COMANDO_VOLTAR + "\" para retornar: ");
+            
+            System.out.println(CYAN + "\n+-------------------------------------------------+" + RESET);
+            System.out.println("  Digite o " + BOLD + "numero" + RESET + " do Pokemon para detalhar");
+            System.out.println("  Ou digite \"" + RED + COMANDO_VOLTAR + RESET + "\" para retornar");
+            System.out.println(CYAN + "+-------------------------------------------------+" + RESET);
+            System.out.print("\nSua escolha: ");
             String entrada = scanner.nextLine().trim();
 
             if (entrada.equalsIgnoreCase(COMANDO_VOLTAR)) {
@@ -113,9 +137,9 @@ public class TelaConsultaPokemon extends MenuBase {
                 if (irParaMenuPrincipal) {
                     return true;
                 }
-                // caso contrário, o laço continua e a lista é exibida novamente
             } catch (PokemonNaoEncontradoException e) {
-                System.out.println("\n" + e.getMessage());
+                System.out.println(RED + "\n" + e.getMessage() + RESET);
+                pausar();
             }
         }
     }
@@ -137,19 +161,18 @@ public class TelaConsultaPokemon extends MenuBase {
     }
 
     /**
-     * Mostra os detalhes completos de um Pokémon e pergunta para onde o
-     * usuário deseja ir em seguida.
-     *
-     * @return true se o usuário escolheu ir direto ao menu principal.
+     * Mostra os detalhes completos de um Pokemon e pergunta para onde o
+     * usuario deseja ir em seguida.
      */
     private boolean mostrarDetalhes(Pokemon pokemon) {
-        System.out.println("\n=========== DETALHES DO POKEMON ===========");
+        limparConsole();
+        System.out.println(YELLOW + BOLD + "================== DETALHES DO POKEMON ==================" + RESET);
         System.out.println(pokemon.exibirDetalhado());
-        System.out.println("=============================================");
+        System.out.println(YELLOW + BOLD + "=========================================================" + RESET);
 
         while (true) {
-            System.out.print("Digite \"" + COMANDO_VOLTAR + "\" para voltar à lista, ou \""
-                    + COMANDO_MENU + "\" para voltar ao menu principal: ");
+            System.out.print("\nDigite \"" + GREEN + COMANDO_VOLTAR + RESET + "\" para a lista, ou \""
+                    + BLUE + COMANDO_MENU + RESET + "\" para o menu principal: ");
             String entrada = scanner.nextLine().trim();
             if (entrada.equalsIgnoreCase(COMANDO_VOLTAR)) {
                 return false;
@@ -157,12 +180,12 @@ public class TelaConsultaPokemon extends MenuBase {
             if (entrada.equalsIgnoreCase(COMANDO_MENU)) {
                 return true;
             }
-            System.out.println("Opção invalida.");
+            System.out.println(RED + "Opcao invalida." + RESET);
         }
     }
 
     private void pausar() {
-        System.out.print("Pressione ENTER para continuar...");
+        System.out.print("\nPressione ENTER para continuar...");
         scanner.nextLine();
     }
 }

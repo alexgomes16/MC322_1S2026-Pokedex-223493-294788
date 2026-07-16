@@ -8,6 +8,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'jacoco'
 }
 
 repositories {
@@ -44,4 +45,36 @@ tasks.named('test') {
 
 tasks.named('run', JavaExec) {
     standardInput = System.in
+}
+
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+// Se estiver usando o plugin 'application' para rodar com ./gradlew run:
+run {
+    standardInput = System.in
+    jvmArgs = ["-Dfile.encoding=UTF-8"]
+}
+
+jacocoTestReport {
+    dependsOn test // Garante que o relatório só roda depois que os testes passarem
+    reports {
+        xml.required = true
+        html.required = true // Ativa o relatório HTML que você vai abrir no navegador
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                'pokedex/ui/**'
+            ])
+        }))
+    }
+}
+
+// Faz com que toda vez que você rodar './gradlew test', o relatório do JaCoCo seja gerado automaticamente
+test {
+    finalizedBy jacocoTestReport 
 }
