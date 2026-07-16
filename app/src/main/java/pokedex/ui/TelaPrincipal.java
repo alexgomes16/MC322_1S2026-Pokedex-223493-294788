@@ -46,10 +46,9 @@ public class TelaPrincipal extends MenuBase {
             case "1":
                 new TelaCadastroPokemon(scanner, pokemonService).iniciar();
                 return true;
-            case "2":
-                System.out.println("\n[Visualizar Pokemon] Em construção — chegando em breve!\n");
-                pausar();
-                return true;
+                case "2":
+                    new TelaConsultaPokemon(scanner, pokemonService).iniciar();
+                    return true;
             case "3":
                 System.out.println("\n[Editar Pokemon] Em construção — chegando em breve!\n");
                 pausar();
